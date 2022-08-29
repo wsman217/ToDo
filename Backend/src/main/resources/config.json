@@ -1,0 +1,8 @@
+{
+  "isFirstBoot": true,
+  "host": "localhost",
+  "port": 3306,
+  "username": "todouser",
+  "password": "password1234",
+  "database": "todo"
+}
