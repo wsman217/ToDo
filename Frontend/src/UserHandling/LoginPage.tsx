@@ -1,5 +1,7 @@
 import React, {useState} from "react";
-import {ImageBackground, Pressable, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {ImageBackground, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+
+const background = require("../../assets/background.jpg");
 
 export default function Login({
                                   login,
@@ -12,7 +14,66 @@ export default function Login({
         login(details);
     }
     return (
-        <View style={{width: "100%", height: "100%", alignContent: "center"}}>
+        <View style={styles.container}>
+            <ImageBackground
+                source={background} style={styles.background} resizeMode={"cover"}>
+                <View style={{
+                    flex: .75,
+                    paddingVertical: 10,
+                }}></View>
+
+                <View style={styles.wrapper}>
+                    <View style={styles.wrapper}>
+                        <View style={styles.inputWrap}>
+                            <View style={styles.iconWrap}>
+                                {/*Image. <Image source={lockIcon} style={styles.icon} resizeMode="contain" />*/}
+                            </View>
+                            <TextInput
+                                onChangeText={newText => setDetails({...details, username: newText})}
+                                placeholder={"Username"}
+                                placeholderTextColor={"#FFF"}
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <View style={styles.inputWrap}>
+                            <View style={styles.iconWrap}>
+                                {/*//Image. <Image source={lockIcon} style={styles.icon} resizeMode="contain" />*/}
+                            </View>
+                            <TextInput
+                                onChangeText={newText => setDetails({...details, password: newText})}
+                                secureTextEntry={true}
+                                placeholder={"Password"}
+                                placeholderTextColor={"#FFF"}
+                                style={styles.input}
+                            />
+                        </View>
+
+                        <TouchableOpacity
+                            activeOpacity={.5}
+                            onPress={() => submitHandler()}>
+                            <View style={styles.button}>
+                                <Text style={styles.buttonText}>Sign In</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.container}>
+                        <View style={styles.signupWrap}>
+                            <Text style={styles.accountText}>Don't have an account?</Text>
+                            <TouchableOpacity
+                                activeOpacity={.5}
+                                onPress={() => setRegistering(true)}>
+                                <View>
+                                    <Text style={styles.signupLinkText}>Sign Up</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+            </ImageBackground>
+        </View>
+        /*<View style={{width: "100%", height: "100%", alignContent: "center"}}>
             <ImageBackground source={require("../../assets/background.jpg")}
                              resizeMode={"contain"}
                              style={{
@@ -88,7 +149,7 @@ export default function Login({
                                 fontWeight: "bold"
                             }}>Login</Text>
                         </TouchableOpacity>
-                        {/*{(error != "") ? <Text style={{fontSize: 15}}>{error}</Text> : ""}*/}
+                        {/!*{(error != "") ? <Text style={{fontSize: 15}}>{error}</Text> : ""}*!/}
                     </View>
 
                     <Pressable onPress={() => setRegistering(true)}
@@ -103,6 +164,72 @@ export default function Login({
 
                 </View>
             </ImageBackground>
-        </View>
+        </View>*/
     )
-}
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    background: {
+        width: "100%",
+        height: "100%",
+    },
+    wrapper: {
+        width: "75%",
+        flex: 1,
+        alignSelf: "center",
+        justifyContent: "center",
+    },
+    inputWrap: {
+        flexDirection: "row",
+        marginVertical: 10,
+        height: 40,
+        borderBottomWidth: 1,
+        borderBottomColor: "#CCC"
+    },
+    iconWrap: {
+        paddingHorizontal: 7,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    icon: {
+        height: 20,
+        width: 20,
+    },
+    input: {
+        flex: 1,
+        paddingHorizontal: 10,
+    },
+    button: {
+        backgroundColor: "#FF3366",
+        paddingVertical: 20,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 30,
+    },
+    buttonText: {
+        color: "#FFF",
+        fontSize: 18,
+    },
+    forgotPasswordText: {
+        color: "#D8D8D8",
+        backgroundColor: "transparent",
+        textAlign: "right",
+        paddingRight: 15,
+    },
+    signupWrap: {
+        backgroundColor: "transparent",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    accountText: {
+        color: "#D8D8D8"
+    },
+    signupLinkText: {
+        color: "#FFF",
+        marginLeft: 5,
+    }
+});
